@@ -1,8 +1,12 @@
-=== Geomap ===
+=== GeoMap ===
 Tags: geo, geographic, map, longitude, latitude
 Contributors: graeme
 
-Geomap generates a map image based on the geographical coordiantes associated with a post using Owen's Geo plugin. It can generate a dot and/or crosshairs of any size, color and various shapes. It can also crap the image from a larger world map, creating a subset of the larger image. It is configured using an Options sub-menu. It is beta -- YMMV.
+GeoMap generates a map image based on the geographical coordiantes associated with a post using Owen Winkler's Geo plugin. It can generate a dot and/or crosshairs of any size, color and various shapes. It can also crap the image from a larger world map, creating a subset of the larger image. It is configured using an Options sub-menu. It is beta -- YMMV.
+
+Owen Winkler's Geo plugin is here: http://www.asymptomatic.net/wp-hacks
+
+GeoMap itself will eventually live somewhere, too.
 
 == Installation ==
 
@@ -11,7 +15,7 @@ Geomap generates a map image based on the geographical coordiantes associated wi
 3. Create folders 'wp-content/geomap' and 'wp-content/geomap/cache'.
 4. Upload at least one map image (JPG, PNG or BMP) to 'wp-content/geomap'. One is provided with the distribution, but you can use your own by placing it in 'wp-content/geomap'.
 5. Activate the plugin on the plugin screen.
-6. Configure with your desired options using the Geomap Options sub-menu.
+6. Configure with your desired options using the GeoMap Options sub-menu.
 7. Add a geomap_image() tag to your template.
 
 == Frequently Asked Questions ==

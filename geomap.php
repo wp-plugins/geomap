@@ -13,43 +13,49 @@ WordPress Version Required: 1.5
         Better filesystem and URL path handling.
 */
 
-// THE OPTIONS PAGE
-if (is_plugin_page()) :
-	if(isset($_POST['Options']))
-	{
-		$use_marker = $_POST['use_marker'] == 1 ? 1 : 0;
-		$use_crosshairs = $_POST['use_crosshairs'] == 1 ? 1 : 0;
+// Localization? Not really sure what this does...
+load_plugin_textdomain('GeoMap');
 
-		update_option('geomap_mapfile', $_POST['mapfile']);
-		update_option('geomap_gen_image_size_x', $_POST['gen_image_size_x']);
-		update_option('geomap_gen_image_size_y', $_POST['gen_image_size_y']);
-		update_option('geomap_use_marker', $_POST['use_marker']);
-		update_option('geomap_dot_type', $_POST['dot_type']);
-		update_option('geomap_dot_size', $_POST['dot_size']);
-		update_option('geomap_dot_color', $_POST['dot_color']);
-		update_option('geomap_use_crosshairs', $use_crosshairs);
-		update_option('geomap_line_color', $_POST['line_color']);
-		update_option('geomap_maxcache', $_POST['maxcache']);
-
-		echo '<div class="updated"><p><strong>' . __('Options updated.', 'GeoMap') . '</strong></p></div>';
-	}
-
-	$mapfile = get_settings('geomap_mapfile');
-	$gen_image_size_x = get_settings('geomap_gen_image_size_x');
-	$gen_image_size_y = get_settings('geomap_gen_image_size_y');
-	$use_marker = get_settings('geomap_use_marker');
-	$dot_type = get_settings('geomap_dot_type');
-	$dot_size = get_settings('geomap_dot_size');
-	$dot_color = get_settings('geomap_dot_color');
-	$use_crosshairs = get_settings('geomap_use_crosshairs');
-	$line_color = get_settings('geomap_line_color');
-	$maxcache = get_settings('geomap_maxcache');
-
-	$ck_dot_type[intval($dot_type)] = ' checked="checked"';
-	$ck_use_marker = $use_marker == 1 ? ' checked="checked"' : '';
-	$ck_use_crosshairs = $use_crosshairs == 1 ? ' checked="checked"' : '';
-
-	echo '
+// DEFINE THE CLASS HERE
+class GeoMap
+{
+     function options_page()
+     {
+     	if(isset($_POST['GeoMapOptions']))
+     	{
+     		$use_marker = $_POST['use_marker'] == 1 ? 1 : 0;
+     		$use_crosshairs = $_POST['use_crosshairs'] == 1 ? 1 : 0;
+     
+     		update_option('geomap_mapfile', $_POST['mapfile']);
+     		update_option('geomap_gen_image_size_x', $_POST['gen_image_size_x']);
+     		update_option('geomap_gen_image_size_y', $_POST['gen_image_size_y']);
+     		update_option('geomap_use_marker', $_POST['use_marker']);
+     		update_option('geomap_dot_type', $_POST['dot_type']);
+     		update_option('geomap_dot_size', $_POST['dot_size']);
+     		update_option('geomap_dot_color', $_POST['dot_color']);
+     		update_option('geomap_use_crosshairs', $use_crosshairs);
+     		update_option('geomap_line_color', $_POST['line_color']);
+     		update_option('geomap_maxcache', $_POST['maxcache']);
+     
+     		echo '<div class="updated"><p><strong>' . __('Options updated.', 'GeoMap') . '</strong></p></div>';
+     	}
+     
+     	$mapfile = get_settings('geomap_mapfile');
+     	$gen_image_size_x = get_settings('geomap_gen_image_size_x');
+     	$gen_image_size_y = get_settings('geomap_gen_image_size_y');
+     	$use_marker = get_settings('geomap_use_marker');
+     	$dot_type = get_settings('geomap_dot_type');
+     	$dot_size = get_settings('geomap_dot_size');
+     	$dot_color = get_settings('geomap_dot_color');
+     	$use_crosshairs = get_settings('geomap_use_crosshairs');
+     	$line_color = get_settings('geomap_line_color');
+     	$maxcache = get_settings('geomap_maxcache');
+     
+     	$ck_dot_type[intval($dot_type)] = ' checked="checked"';
+     	$ck_use_marker = $use_marker == 1 ? ' checked="checked"' : '';
+     	$ck_use_crosshairs = $use_crosshairs == 1 ? ' checked="checked"' : '';
+     
+     	echo '
 		<div class="wrap">
 		<h2>' . __('Geo Map Generator', 'GeoMap') . '</h2>
 		<form method="post">
@@ -57,16 +63,16 @@ if (is_plugin_page()) :
 				<tr>
 					<th width="33%" scope="row">' . __('Map File', 'GeoMap') . ':</th>
 					<td><select name="mapfile">';
-     $mapfiles = glob("/www/boris.wordthecat.com/wp-content/geomap/*.{jpg,png,bmp,JPG,PNG,BMP}", GLOB_BRACE);
-	if (is_array($mapfiles)) {
-		foreach ($mapfiles as $file) {
-			$filen = basename($file);
-			echo '<option value="'.$filen.'"';
- 			if ($filen == $mapfile) echo ' selected="selected"';
- 			echo '>'.$filen.'</option>';
-		}
-	}
-	echo '
+          $mapfiles = glob("/www/boris.wordthecat.com/wp-content/geomap/*.{jpg,png,bmp,JPG,PNG,BMP}", GLOB_BRACE);
+     	if (is_array($mapfiles)) {
+     		foreach ($mapfiles as $file) {
+     			$filen = basename($file);
+     			echo '<option value="'.$filen.'"';
+      			if ($filen == $mapfile) echo ' selected="selected"';
+      			echo '>'.$filen.'</option>';
+     		}
+     	}
+     	echo '
 		 		</select></td>
 				</tr>
 				<tr valign="top">
@@ -121,20 +127,11 @@ if (is_plugin_page()) :
 					<td><input type="text" name="maxcache" size="6" value="'. $maxcache .'" />Kilobytes (KB)</td>
 				</tr>
 			</table>
-               <p class="submit"><input type="submit" name="Options" value="' . __('Update Options', 'GeoMap') . ' &raquo;" /></p>
+               <p class="submit"><input type="submit" name="GeoMapOptions" value="' . __('Update Options', 'GeoMap') . ' &raquo;" /></p>
 		</form>
 		</div>
 	';
-
-// NOT THE OPTIONS PAGE
-else:
-
-// Localization? Not really sure what this does...
-load_plugin_textdomain('GeoMap');
-
-// DEFINE THE CLASS HERE
-class GeoMap
-{
+     }
 
 	function add_options()
 	{
@@ -158,10 +155,10 @@ class GeoMap
 
 	function admin_menu($not_used)
 	{
-		add_options_page(__('Geo Map Generator', 'GeoMap'), __('Geo Map', 'GeoMap'), 5, 'geomap.php');
+		add_options_page(__('Geo Map Generator', 'GeoMap'), __('Geo Map', 'GeoMap'), 5, basename(__FILE__), array('GeoMap', 'options_page'));
 	}
 
-}	// End class Geo-Map
+}	// End class GeoMap
 
 // Function lifted from article by Simon Moss on PHPBuilder.com
 // http://www.phpbuilder.com/columns/moss20031023.php3
@@ -280,5 +277,4 @@ function geomap_image()
 
 add_action('admin_menu', array('GeoMap', 'admin_menu'));
 
-endif; // End of big wrapper if.
 ?>

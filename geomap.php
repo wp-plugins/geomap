@@ -63,7 +63,7 @@ class GeoMap
 				<tr>
 					<th width="33%" scope="row">' . __('Map File', 'GeoMap') . ':</th>
 					<td><select name="mapfile">';
-          $mapfiles = glob("/www/boris.wordthecat.com/wp-content/geomap/*.{jpg,png,bmp,JPG,PNG,BMP}", GLOB_BRACE);
+          $mapfiles = glob(ABSPATH."/wp-content/geomap/*.{jpg,png,bmp,JPG,PNG,BMP}", GLOB_BRACE);
      	if (is_array($mapfiles)) {
      		foreach ($mapfiles as $file) {
      			$filen = basename($file);
@@ -151,6 +151,8 @@ class GeoMap
 	{
 	 	if (!get_settings('geomap_mapfile'))
 	 	   GeoMap::add_options();
+	 	
+	 	if (!file_exists(ABSPATH.'/wp-content/geomap/cache') mkdir(ABSPATH.'/wp-content/geomap/cache');
 	}
 
 	function admin_menu($not_used)
@@ -196,7 +198,7 @@ function geomap_image()
 
 	$hash = md5($lon.$lat.$mapfile.$size_x.$size_y.$use_marker.$dot_type.$dot_size.$dot_color.$use_crosshairs.$line_color);
 	$url = get_settings('home')."/wp-content/geomap/cache/".$hash.".png";
-	$filename = ABSPATH.'/cache/'.$hash.".png";
+	$filename = ABSPATH.'/wp-content/geomap/cache/'.$hash.".png";
 
 	// If we've done this combination before, we can use the cached version.
 	if (file_exists($filename)) {
@@ -206,9 +208,9 @@ function geomap_image()
 
      /*
      // Check if we've overrun our cache size.
-     $sizeofdir = sizeof($DATADIR.'cache/');
+     $sizeofdir = sizeof(ABSPATH.'/wp-content/geomap/cache/');
      while ($sizeofdir > $maxcache) {
-           foreach (glob($DATADIR.'cache/') as $file) {
+           foreach (glob(ABSPATH.'/wp-content/geomap/cache/') as $file) {
                    isset($oldest) : $oldest = min($oldest,fileatime($file) ? $oldest = fileatime($file);
            }
            unlink($oldest);

@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: GeoMap
-Plugin URI: http://boris.wordthecat.com/plugins/geomap/
+Plugin URI: http://svn.wp-plugins.org/geomap/trunk/
 Description: Generates a map from a source image based on coordinates entered using <a href="http://www.asymptomatic.net">Owen Winkler's</a> excellent <a href="http://www.asymptomatic.net/wp-hacks">Geo plugin</a>. Map markings can be configured on the <a href="admin.php?page=geomap.php">options page</a>.
 Version: 0.9&alpha;
 Author: Graeme Lennon
-Author URI: http://boris.wordthecat.com/
+Author URI: http://svn.wp-plugins.org/geomap/trunk/
 WordPress Version Required: 1.5
 */
 /*

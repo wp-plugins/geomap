@@ -1,16 +1,33 @@
 <?php
 /*
 Plugin Name: GeoMap
-Plugin URI: http://svn.wp-plugins.org/geomap/trunk/
-Description: Generates a map from a source image based on coordinates entered using <a href="http://www.asymptomatic.net">Owen Winkler's</a> excellent <a href="http://www.asymptomatic.net/wp-hacks">Geo plugin</a>. Map markings can be configured on the <a href="admin.php?page=geomap.php">options page</a>.
+Plugin URI: http://metafugitive.com/plugins/geomap/
+Description: Generates a map from a source image based on coordinates entered using <a href="http://www.asymptomatic.net">Owen Winkler&rsquo;s</a> <a href="http://www.asymptomatic.net/wp-hacks">Geo plugin</a>. Map markings can be configured on the <a href="admin.php?page=geomap.php">options page</a>.
 Version: 0.9&alpha;
 Author: Graeme Lennon
-Author URI: http://svn.wp-plugins.org/geomap/trunk/
-WordPress Version Required: 1.5
+Author URI: http://metafugitive.com/
+WordPress Version Required: 1.5.1
+
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 */
 /*
-  TODO: Cache management features.
-        Better filesystem and URL path handling.
+  TODO:
+	Cache management features.
+	Better filesystem and URL path handling.
+	Check for permission faults.
 */
 
 // Localization? Not really sure what this does...
